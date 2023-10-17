@@ -1,11 +1,12 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import json
 
 driver = webdriver.Chrome()  
 user_handles = []
 
-for page in range(1,11):
+for page in range(0,11):
+    # Go to pages: 1, 72, 145, ... 711
+    page = (page * 71) + 1
     driver.get(f"https://codeforces.com/ratings/page/{page}")
 
     datatable_div = driver.find_element(By.CSS_SELECTOR, "div.datatable.ratingsDatatable")
