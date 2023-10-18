@@ -25,7 +25,6 @@ for user_index, user in enumerate(users):
 
             for tag in tags:
                 tag_submissions = []
-                total_tag_submissions = 0
 
                 for submission in submissions:
                     tag_with_spaces = tag.replace("+", " ")
@@ -43,13 +42,12 @@ for user_index, user in enumerate(users):
                 with open(output_file, "w") as json_file:
                     json.dump(tag_submissions, json_file, indent=4)
 
-                total_user_tag_submissions = len(tag_submissions)
-                total_tag_submissions += total_user_tag_submissions
+                user_tag_submissions = len(tag_submissions)
+                submissions_per_tags[tag] += user_tag_submissions
 
                 print(f"{'-'*50}")
-                print(f"{tag} - {user} submissions: {total_user_tag_submissions}")
-                print(f"Total {tag} submissions so far: {total_tag_submissions}")
-                submissions_per_tags[tag] += total_tag_submissions
+                print(f"{tag} - {user} submissions: {user_tag_submissions}")
+                print(f"Total {tag} submissions so far: {submissions_per_tags[tag]}")
 
         else:
             print("~~~~~ Unsuccessful API call ~~~~~")
