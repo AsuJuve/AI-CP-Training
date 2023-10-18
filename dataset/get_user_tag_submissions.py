@@ -15,13 +15,13 @@ for user_index, user in enumerate(users):
     api_url = f"https://codeforces.com/api/user.status?handle={user}&from=1"
     response = requests.get(api_url)
 
+    print(f"{'='*50}")
+    print(f"User #{user_index + 1}")
+
     if response.status_code == 200:
         data = response.json()
         if data["status"] == "OK":
             submissions = data["result"]
-            
-            print(f"{'='*50}")
-            print(f"User #{user_index + 1}")
 
             for tag in tags:
                 tag_submissions = []
@@ -50,9 +50,10 @@ for user_index, user in enumerate(users):
                 print(f"Total {tag} submissions so far: {submissions_per_tags[tag]}")
 
         else:
-            print("~~~~~ Unsuccessful API call ~~~~~")
+            print("\n~~~~~ Unsuccessful API call ~~~~~\n")
+            print(data["comment"])
     else:
-        print("~~~~~ Error connecting to Codeforces API ~~~~~")
+        print("\n~~~~~ Error connecting to Codeforces API ~~~~~\n")
 
 with open("submissions/total_tags_submissions.txt", "w") as file:
     file.write("----- TOTAL SUBMISSIONS COLLECTED PER TAG -----\n")
