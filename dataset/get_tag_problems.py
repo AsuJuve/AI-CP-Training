@@ -16,7 +16,7 @@ for tag in tags:
 
             output_file = f"submissions/{tag}/{tag}.json"
             with open(output_file, "w") as json_file:
-                json.dump(problems, json_file)
+                json.dump(problems, json_file, indent=4)
 
             print(f"Data saved in file {output_file}")
         else:
