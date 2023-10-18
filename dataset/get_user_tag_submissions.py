@@ -9,7 +9,7 @@ with open("users.txt", "r") as users_file:
 with open("tags.txt", "r") as tags_file:
     tags = [line.strip() for line in tags_file]
 
-submissions_by_tags = dict([(tag, 0) for tag in tags])
+submissions_per_tags = dict([(tag, 0) for tag in tags])
 
 for user_index, user in enumerate(users):
     api_url = f"https://codeforces.com/api/user.status?handle={user}&from=1"
@@ -49,7 +49,7 @@ for user_index, user in enumerate(users):
                 print(f"{'-'*50}")
                 print(f"{tag} - {user} submissions: {total_user_tag_submissions}")
                 print(f"Total {tag} submissions so far: {total_tag_submissions}")
-                submissions_by_tags[tag] += total_tag_submissions
+                submissions_per_tags[tag] += total_tag_submissions
 
         else:
             print("~~~~~ Unsuccessful API call ~~~~~")
@@ -59,4 +59,4 @@ for user_index, user in enumerate(users):
 with open("submissions/total_tags_submissions.txt", "w") as file:
     file.write("----- TOTAL SUBMISSIONS COLLECTED PER TAG -----\n")
     for tag in tags:
-        file.write(f"{tag}: {submissions_by_tags[tag]}\n")
+        file.write(f"{tag}: {submissions_per_tags[tag]}\n")
